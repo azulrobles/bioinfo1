@@ -1,0 +1,115 @@
+---
+title: "Tarea2_bioinfo"
+format: html
+editor: visual
+---
+
+## Métodos de secuenciamiento 
+
+**Primera generación**
+
+- **Sanger** → dNTPs.
+
+  - ddNTPS que carecen del grupo OH en la pentosa.
+
+  - Electroforesis capilar.
+
+  - PCR de una sola secuencia.
+
+  - Método de secuenciamiento de secuencias de long. corta.
+
+  - Agrega fluoróforos de distintos colores a los nucleótidos.
+
+  - Separación por electroforesis capilar.
+
+**NGS → Segunda generación**
+
+- **Illumina**
+
+  - PCR de puente.
+
+  - Marcadores que se pegan al extremo 3’ de las secuencias, estos marcadores después buscan la secuencia complementaria de los marcadores y se pegan en ese lugar.
+
+  - Varias secuencias.
+
+  - Cada secuencia se corta aprox al mismo tamaño.
+
+  - Agregan fluoróforos a cada nueva hebra sintetizada por polimerasa y luego la hebra es liberada.
+
+  - Secuenciación de todas las hebras forward y posteriormente todas las hebras reverse.
+
+  - Fotografía de destello de colores por nucleótido.
+
+  - Secuenciación masiva.
+
+  - Clusters de la misma secuencia, PCR.
+
+  - Solo info de exones.
+
+- **Ion Torrent**
+
+  - **liberación** de protones
+
+  - cambios en pH al agregar nucleótidos
+
+  - chips semiconductores
+
+  - Microchips de silicio con millones de pocillos.
+
+  - usa nanobits
+
+  - alta tasa de error.
+
+  - amplificación en emulsión.
+
+**Tercera generación**
+
+- **PacBio** → alta fidelidad.
+
+  - de 1,000 a 50,000 tamaño de hebra.
+
+  - más cara
+
+  - sMRT
+
+  - Fluorescencia
+
+  - Identificación por síntesis
+
+  - No rompe la secuencia original.
+
+  - Te da info sobre intrones, promotores, exones, metilación.
+
+- **Oxford Nanopore**
+
+  - La secuencia se pasa por un nanoporo (una proteína).
+
+  - Cuando pasa por la membrana, la hebra se trasloca a través del nanoporo.
+
+  - Luego la hebra **bloquea e interrumpe parcialmente el flujo de la corriente iónica**.
+
+  - Se altera o cae la corriente eléctrica y esa variación en la corriente se capta y se identifica el base calling.
+
+  - alta tasa de error.
+
+  - sMRT (single molecular real time).
+
+  - no fluorescencia
+
+  - También ofrece secuenciador portatil.
+
+**Porcentaje de uso en artículos científicos**
+
+![](Downloads/bio1.jpeg){width="411"}
+
+**Fotos de actividad - métodos de secuenciamiento**
+
+![](Downloads/bio2.jpeg){width="430"}
+
+![](Downloads/bio3.jpeg){width="430"}
+
+![](Downloads/bio4.jpeg){width="189"}
+
+**Actividad 2 - Identificación de los valores de calidad de secuencias**
+
+![](Downloads/bio5.jpeg){width="428"}
