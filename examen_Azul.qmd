@@ -1,0 +1,247 @@
+---
+title: "Reporte técnico de bioproject PRJNA268110"
+format: pdf
+editor: visual
+author: Azul Robles
+---
+
+### Introducción
+
+Durante la fase S del ciclo celular es fundamental mantener la integridad del genoma para prevenir arreglos cromosómicos e inestabilidad. Cuando las células enfrentan estrés de replicación por la presencia de hidroxiurea (HU) —un inhibidor de la enzima ribonucleótido reductasa—, provoca la reducción de desoxirribonucleótidos (dNTPs). Lo que ocasiona que las horquillas de replicación se detengan y la acumulación de regiones de ADN de cadena sencilla (ssDNA). Volviéndose más propensas a roturas de doble cadena (DSBs).
+
+### Contexto biológico
+
+El presente análisis se basa en los datos genómicos del BioProject **PRJNA268110**, por Wenyi Feng en **SUNY Upstate Medical University,** con fecha de publicación: **20-Nov-2014**.
+
+El estudio utilizó como organismo modelo la levadura de cerveza (*Saccharomyces cerevisiae*), analizando dos cepas principales: la cepa **WFA73** (genotipo *mec1*) y la cepa **WFA72** (genotipo *wildtype*).
+
+El objetivo general del estudio es determinar si todas las horquillas de replicación que contienen brechas de ADN de cadena sencilla tienen la misma probabilidad de generar roturas de doble cadena cuando las células del organismo de estudio intentan recuperarse tras la exposición a la hidroxiurea (HU).
+
+El estudio buscaba responder si las roturas de doble cadena de ADN ocurren al azar en cualquier horquilla de replicación dañada o si ocurren por colisiones entre la replicación y la transcripción de genes inducidos por estrés.
+
+### Objetivo del estudio
+
+Evaluar el perfil de expresión génica (RNA-Seq) de las cepas **WFA73** (mec1) y **WFA72** (wildtype) de *Saccharomyces cerevisiae* durante y después de la exposición a hidroxiurea, como contexto para entender las colisiones entre transcripción y replicación descritas en el estudio asociado (Break-seq).
+
+### Datos y metodología
+
+Se exploraron los datos del bioproject **PRJNA268110** en la base de NCBI.
+
+Para la descarga del Metadata y Accession List:
+
+Ingresé al apartado de **SRA Experiments** que se encuentra en una tabla en el borde inferior izquierdo de la página.
+
+En la parte superior derecha, seleccioné **Send to** y elegí **Run Selector,** presionando **Go.**
+
+Una vez dentro de la página de **SRA Run Selector** presiono **Metadata** y **Accession List** para descargar la tabla con la información perteneciente al bioproject y los ID de las secuencias de interés.
+
+Una vez teniendo los ID de las secuencias, el siguiente paso es convertirlos en archivos FastQ para su posterior análisis:
+
+- En bash, primero entré a un servidor y dentro de un nodo, seleccioné mi carpeta de trabajo.
+
+\#\
+Lista de Software\
+\$ module avail
+
+\#\
+Descargar SRA\
+\$ module load sra/3.1.1
+
+\#\
+Editar Slurm\
+\$ nano my_script.slurm
+
+\#\
+Conversión a FastQ\
+Ejemplo:
+
+- prefetch SRR1658454
+- fasterq-dump SRR1658454\
+
+#### Descarga del genoma ensamblado
+
+Accedemos a la página de NCBI donde se encuentran los genomas.
+
+- Buscar "Saccharomyces cerevisiae".
+
+- Seleccionar "Genomes - Browse all Saccharomyces cerevisiae genomes".
+
+- Seleccionar "R64" que tiene una palomita en verde.
+
+- Presionar en el botón de nombre "datasets".
+
+- Copiar la información del recuadro y pegarla en my_script.slurm.
+
+- Elimina "gff3,rna,seq-report".
+
+\#\
+Subir el proceso\
+\$ sbatch my_script.slurm\
+
+Este proceso te regresará el archivo fastq de cada secuencia que subiste, así como un achivo .zip en donde tendrás las secuencias para cds, protein y genome.
+
+Se trabajó mediante bash
+
+### Fuentes de datos
+
+Base de datos para bioproject, consultada con fecha de 03-oct-2026:
+
+<https://ncbi.nlm.nih.gov/bioproject/?term=PRJNA268110>
+
+Base de datos para descargar genoma de referencia, con fecha de 03-oct-2026:
+
+<https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000146045.2/>
+
+Identificador de BioProject:
+
+- PRJNA268110
+
+Se accedió por medio de la página web de NCBI y por línea de comandos en Bash.
+
+Publicación asociada:
+
+- [Hoffman EA *et al.,*](https://ncbi.nlm.nih.gov/pubmed/25609572) "Break-seq reveals hydroxyurea-induced chromosome fragility as a result of unscheduled conflict between DNA replication and transcription.", *Genome Res*, 2015 Mar;25(3):402-12
+
+### BioProject/BioSample/SRA.
+
+Explorar el BioProject y las bases de datos relacionadas.\
+Describir:\
+Identificar los BioSample(s) asociados. Identificar los SRA Run(s)\
+correspondientes.\
+
+| BioSample    | SRA Experiment | SRA Run    | Tipo de secuenciación | Paired/Single |
+|--------------|----------------|------------|-----------------------|---------------|
+| SAMN03203061 | SRX764815      | SRR1658454 | RNA-Seq               | PAIRED        |
+| SAMN03203063 | SRX764816      | SRR1658455 | RNA-Seq               | PAIRED        |
+| SAMN03203066 | SRX764817      | SRR1658456 | RNA-Seq               | PAIRED        |
+| SAMN03203053 | SRX764818      | SRR1658457 | RNA-Seq               | PAIRED        |
+| SAMN03203062 | SRX764819      | SRR1658458 | RNA-Seq               | PAIRED        |
+| SAMN03203059 | SRX764820      | SRR1658459 | RNA-Seq               | PAIRED        |
+| SAMN03203067 | SRX764821      | SRR1658460 | RNA-Seq               | PAIRED        |
+| SAMN03203068 | SRX764822      | SRR1658461 | RNA-Seq               | PAIRED        |
+
+Para la secuenciación se utilizó Illumina, con tecnología Mi-seq y formato SRA.\
+Los datos fueron paired-end y el formato de los archivos descargados fue FastQ.\
+Cada Run contiene entre 2.1 y 6.1 millones de pares de lecturas de \~74 pb por extremo.
+
+### Datos descargados
+
+A partir de los datos que descargamos de las secuencias asociadas al\
+proyecto.
+
+\#\
+Número de archivos descargados\
+\$ ls \*.fastq \| wc -l\
+- 16\
+\#\
+Tamaño de cada archivo (Mb o Gb) - Reportaré únicamente los forward\
+\$ du -sh \*.fastq
+
+\- 741M SRR1658454_1.fastq - 449M SRR1658455_1.fastq - 522M SRR1658456_1.fastq - 960M SRR1658457_1.fastq - 1.3G SRR1658458_1.fastq - 870M SRR1658459_1.fastq - 715M SRR1658460_1.fastq - 1.1G SRR1658461_1.fastq
+
+\#\
+Número de secuencias de cada FastQ (Reportaré únicamente las forward)\
+\$ grep -c @SRR \*.fastq\
+
+- SRR1658454_1.fastq:3438388 SRR1658455_1.fastq:2090805 SRR1658456_1.fastq:2428934 SRR1658457_1.fastq:4452257 SRR1658458_1.fastq:6080904 SRR1658459_1.fastq:4037197 SRR1658460_1.fastq:3317701 SRR1658461_1.fastq:4961938
+
+\#\
+Longitud promedio de lecturas\
+\$ head -n1 \*.fastq\
+- length=75
+
+\#\
+Identificar si las lecturas son paired-end o single-end\
+- paired-end, ya que se descargaron .fastq forward y reverse de cada secuencia.
+
+\#\
+Mostrar una parte de las lecturas crudas\
+\$ head -n4 SRR1658454_1.fastq\
+@SRR1658454.1 1 length=75\
+CGGGAATTCATCATCAGTCCTTCCCACTAAGTAAACAAGGTGTCTTCATCTCTCAAATACTCACCAATATCTGCT\
++SRR1658454.1 1 length=75\
+668--+CFF9FGGGGGGGGGGGGGGGGGGGGGFFDFFGFFG8CFFFF9FFFGFGFAAFFFDF,CFC8F,CCC,\
+
+Representan: - 1. Idetificador, 2. Secuencia, 3. Separador, 4. Calidad
+
+### Herramientas utilizadas.
+
+\#\
+Entrar a sesión interactiva\
+\$ srun --export=ALL --x11 --pty bash
+
+\$ module avail\
+\$ module load fastqc/0.11.3
+
+\#\
+FastQ a FastQC\
+\$ fastqc \*.fastq
+
+\#\
+Descomprimir archivo\
+\$ unzip '\*.zip'
+
+\#\
+Número total de reads. Longitud de las lecturas. Visualización de los resultados\
+\$ less \*fastqc/fastqc_data.txt \| grep -E "Total Sequences\|Sequence length\|Filename"
+
+- Filename SRR1658454_1.fastq Total Sequences 3438388 Sequence length 35-75
+- Filename SRR1658454_2.fastq Total Sequences 3438388 Sequence length 35-75
+- Filename SRR1658455_1.fastq Total Sequences 2090805 Sequence length 35-75
+- Filename SRR1658455_2.fastq Total Sequences 2090805 Sequence length 35-75
+- Filename SRR1658456_1.fastq Total Sequences 2428934 Sequence length 35-75
+- Filename SRR1658456_2.fastq Total Sequences 2428934 Sequence length 35-75
+- Filename SRR1658457_1.fastq Total Sequences 4452257 Sequence length 35-75
+- Filename SRR1658457_2.fastq Total Sequences 4452257 Sequence length 35-75
+- Filename SRR1658458_1.fastq Total Sequences 6080904 Sequence length 35-75
+- Filename SRR1658458_2.fastq Total Sequences 6080904 Sequence length 35-75
+- Filename SRR1658459_1.fastq Total Sequences 4037197 Sequence length 35-75
+- Filename SRR1658459_2.fastq Total Sequences 4037197 Sequence length 35-75
+- Filename SRR1658460_1.fastq Total Sequences 3317701 Sequence length 35-75
+- Filename SRR1658460_2.fastq Total Sequences 3317701 Sequence length 35-75
+- Filename SRR1658461_1.fastq Total Sequences 4961938 Sequence length 35-75
+- Filename SRR1658461_2.fastq Total Sequences 4961938 Sequence length 35-75
+
+Ejemplo de cómo luce:
+
+- less \*fastqc/fastqc_data.txt \| head -n10
+
+![](images/clipboard-546858583.png){width="410"}
+
+**El genoma de referencia utilizado tiene como nombre:**
+
+:   "Genome assembly R64"
+
+**Obtenido desde NCBI:**
+
+:   <https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000146045.2/>
+
+**El organismo es:**
+
+:   "*Saccharomyces cerevisiae*".
+
+**Number accession:**
+
+**NCBI RefSeq assembly**
+
+:   GCF_000146045.2^(†)^
+
+**Submitted GenBank assembly**
+
+:   GCA_000146045.2
+
+**Tamaño total del genoma**
+
+:   12.1Mb
+
+**Número de contigs/scaffolds y cromosomas**
+
+:   16 contigs, 16 scaffolds y 16 cromosomas
+
+### Resultados
+
+Se analizó el BioProject **PRJNA268110**, que contiene 8 corridas (SRR1658454 a SRR1658461) de secuenciación Illumina paired-end, cada una con su BioSample y SRA Experiment. Los datos se descargaron con `prefetch` y `fasterq-dump` desde un servidor, mediante un script de Slurm. Se obtuvieron 16 archivos FastQ (forward y reverse por corrida), con tamaños de 449 MB a 1.3 GB por archivo forward.
+
+Las corridas suman **\~30.8 millones de pares de lecturas**. Cada una tiene entre 2.09 millones (SRR1658455) y 6.08 millones (SRR1658458). Las lecturas miden hasta 75 pb, y FastQC reportó longitudes de 35 a 75 pb, codificación Sanger/Illumina. El número de lecturas forward y reverse coincide en todas las corridas, lo que confirma que los pares están completos.
+
+También se descargó el genoma de referencia de *S. cerevisiae* (ensamble R64, GCF_000146045.2), de 12.1 Mb, con 16 cromosomas, 16 contigs y 16 scaffolds. Con esto quedan listos los datos para el siguiente paso, que sería el alineamiento de las lecturas contra el genoma.
